@@ -64,10 +64,10 @@
                     $.getJSON("clients.json", 
                             function (data) {
                         var client = '';
-                        data.sort((a, b) => a['NAME'] - b['NAME'])
+                        var links = data.sort((a, b) => a['NAME'] - b['NAME'])
   
                         // ITERATING THROUGH OBJECTS
-                        $.each(data, function (key, value) {
+                        $.each(links, function (key, value) {
   
                             //CONSTRUCTION OF ROWS HAVING
                             // DATA FROM JSON OBJECT
