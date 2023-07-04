@@ -64,6 +64,7 @@
                     $.getJSON("clients.json", 
                             function (data) {
                         var client = '';
+                        data.sort((a, b) => a['NAME'] - b['NAME'])
   
                         // ITERATING THROUGH OBJECTS
                         $.each(data, function (key, value) {
