@@ -53,7 +53,7 @@
         <table id='table'>
             <!-- HEADING FORMATION -->
             <tr>
-                <th>RustDesk ID</th>
+                <th>ID</th>
                 <th>Client Name</th>
             </tr>
   
@@ -72,7 +72,7 @@
                             // DATA FROM JSON OBJECT
                             client += '<tr>';
                             client += '<td> <a href="rustdesk://connections/new/' + 
-                                value.ID + '">' + value.ID + '</a> </td>';
+                                value.ID + '"/>' + value.ID + '</td>';
   
                             client += '<td>' + 
                                 value.NAME + '</td>';
