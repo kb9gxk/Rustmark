@@ -64,7 +64,7 @@
                     $.getJSON("clients.json", 
                             function (data) {
                         var client = '';
-                        var links = data.sort(function(a, b) { return a.id - b.id; });
+                        var links = data.sort(function(a, b) { return a.NAME - b.NAME; });
   
                         // ITERATING THROUGH OBJECTS
                         $.each(links, function (key, value) {
