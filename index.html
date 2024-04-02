@@ -58,7 +58,7 @@
         <table id='table'>
             <!-- HEADING FORMATION -->
             <tr>
-                <th>ID</th>
+                <!--<th>ID</th>-->
                 <th>Client Name</th>
             </tr>
   
@@ -77,11 +77,11 @@
                             //CONSTRUCTION OF ROWS HAVING
                             // DATA FROM JSON OBJECT
                             client += '<tr>';
-                            client += '<td> <a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.ID + '</a>' + 
+                            client += '<td> <a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a>' + 
                               '</td>';
   
-                            client += '<td>' + 
-                                value.NAME + '</td>';
+                            //client += '<td>' + 
+                               // value.NAME + '</td>';
   
                             client += '</tr>';
                         });
