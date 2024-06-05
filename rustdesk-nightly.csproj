@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<OutputType>Exe</OutputType>
+	<TargetFramework>net8.0</TargetFramework>
+	<RootNamespace>Rustdesk-Nightly</RootNamespace>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+	<ApplicationIcon>icon.ico</ApplicationIcon>
+	<StartupObject></StartupObject>
+	<SelfContained>True</SelfContained>
+	<PublishAot>True</PublishAot>
+	<AssemblyName>rustdesk-nightly</AssemblyName>
+	<Company>Jeff Parrish</Company>
+	<ProductName>JP Custom Nighty Rustdesk Installer</ProductName>
+	<Description>JP Custom Nightly Rustdesk Installer</Description>
+	<Copyright>© 2023-2024</Copyright>
+	<AssemblyVersion>1.2.6.1</AssemblyVersion>
+	<FileVersion>1.2.6.1</FileVersion>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+	<Authors>Jeff Parrish</Authors>
+	<NeutralLanguage>en-US</NeutralLanguage>
+	<SignAssembly>False</SignAssembly>
+	<Product>JP Custom Nightly Rustdesk Installer</Product>
+	<Version>1.2.6</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
