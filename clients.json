@@ -32,6 +32,7 @@
   { "ID":"506547150", "NAME":"Home-Chromebook" },
   { "ID":"505436930", "NAME":"Home-Desktop" },
   { "ID":"340447704", "NAME":"Home-Laptop" },
+  { "ID":"70825674", "NAME":"Home-Presentation" },
   { "ID":"126479316", "NAME":"Home-Server" },
   { "ID":"740888751", "NAME":"Home-Vultr" },
   { "ID":"141809644", "NAME":"Kenosha-K3" },
