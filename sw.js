@@ -1,7 +1,7 @@
 // Service Worker Cache Name
 // Increment this version number whenever you make changes to any cached assets (HTML, CSS, JS, images, JSON, fonts).
 // This ensures users get the latest version of your PWA.
-const CACHE_NAME = 'rustmark-support-v1'; // Changed from v1 to v2 as we're refining.
+const CACHE_NAME = 'rustmark-support-v2'; // Changed from v1 to v2 as we're refining.
 
 // List of URLs to cache during installation
 // These are the core assets of your application that should be available offline.
