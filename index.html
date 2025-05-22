@@ -44,7 +44,7 @@
             background-color: var(--card-background);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* More prominent shadow for dark theme */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             width: 100%;
             max-width: 600px;
         }
@@ -64,7 +64,7 @@
         }
 
         h1 a:hover {
-            color: var(--secondary-color); /* Green accent on hover for title */
+            color: var(--secondary-color);
         }
 
         /* Search Bar Styling */
@@ -81,25 +81,26 @@
             font-size: 1.1em;
             box-sizing: border-box;
             outline: none;
-            background-color: var(--input-background); /* Darker input background */
-            color: var(--input-text-color); /* Light text color */
+            background-color: var(--input-background);
+            color: var(--input-text-color);
             transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        #clientSearch::placeholder { /* Styling for placeholder text */
+        #clientSearch::placeholder {
             color: var(--placeholder-color);
-            opacity: 1; /* Firefox default opacity is lower */
+            opacity: 1;
         }
 
         #clientSearch:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); /* Primary color shadow with transparency */
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            /* Initially hidden by default, shown by JS */
         }
 
         th,
@@ -110,20 +111,20 @@
         }
 
         th {
-            background-color: var(--primary-color); /* Primary color for table header */
-            color: var(--input-text-color); /* Light text on primary color */
+            background-color: var(--primary-color);
+            color: var(--input-text-color);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         td {
-            background-color: var(--card-background); /* Card background for cells */
+            background-color: var(--card-background);
             font-weight: 400;
         }
 
         td a {
-            color: var(--primary-color); /* Primary color for links */
+            color: var(--primary-color);
             text-decoration: none;
             display: block;
             padding: 0;
@@ -132,19 +133,34 @@
         }
 
         td a:hover {
-            background-color: var(--hover-background); /* Lighter dark background on hover */
+            background-color: var(--hover-background);
             color: var(--primary-color);
             text-decoration: underline;
         }
 
-        /* Message for no results */
+        /* Messages for user guidance */
+        #initialMessage,
         #noResults {
             text-align: center;
             color: var(--light-text-color);
             margin-top: 20px;
             font-style: italic;
+        }
+
+        #noResults {
+            display: none; /* Hidden by default */
+        }
+
+        #initialMessage {
+            /* Displayed on load, hidden when searching */
+            display: block;
+        }
+
+        /* Hide table by default, show when populated by JS */
+        #clientTable {
             display: none;
         }
+
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -188,8 +204,11 @@
         </h1>
 
         <div class="search-container">
-            <input type="text" id="clientSearch" placeholder="Search client or device name...">
+            <input type="text" id="clientSearch" placeholder="Search client or device name..." autofocus>
         </div>
+
+        <p id="initialMessage">Start typing in the search bar to find clients.</p>
+        <p id="noResults">No matching clients found.</p>
 
         <table id='clientTable'>
             <thead>
@@ -201,7 +220,6 @@
                 </tbody>
         </table>
 
-        <p id="noResults">No matching clients found.</p>
 
         <script>
             let allClientsData = []; // Store the full data globally
@@ -212,18 +230,37 @@
                     allClientsData = data.sort(function(a, b) {
                         return a.NAME.localeCompare(b.NAME);
                     });
-                    renderTable(allClientsData); // Initial render
+                    // DO NOT call renderTable(allClientsData) here
+                    // The table will remain hidden until a search is performed.
                 }).fail(function() {
                     $('#clientTableBody').html('<tr><td colspan="1" style="text-align: center; color: var(--primary-color);">Error loading client data. Please check clients.json.</td></tr>');
+                    // Hide the initial message if there's an error
+                    $('#initialMessage').hide();
                 });
+
+                // Set focus on the search bar when the page loads
+                $('#clientSearch').focus();
 
                 // Search functionality
                 $('#clientSearch').on('keyup', function() {
-                    const searchTerm = $(this).val().toLowerCase();
-                    const filteredClients = allClientsData.filter(client => {
-                        return client.NAME.toLowerCase().includes(searchTerm);
-                    });
-                    renderTable(filteredClients);
+                    const searchTerm = $(this).val().toLowerCase().trim(); // Trim whitespace
+                    const $initialMessage = $('#initialMessage');
+                    const $noResults = $('#noResults');
+                    const $clientTable = $('#clientTable');
+
+                    if (searchTerm.length > 0) {
+                        $initialMessage.hide(); // Hide the initial message once typing starts
+                        const filteredClients = allClientsData.filter(client => {
+                            return client.NAME.toLowerCase().includes(searchTerm);
+                        });
+                        renderTable(filteredClients);
+                        $clientTable.show(); // Show the table when there's a search term
+                    } else {
+                        // If search bar is empty, hide the table and show initial message
+                        $clientTable.hide();
+                        $noResults.hide(); // Hide no results as well
+                        $initialMessage.show(); // Show initial message again
+                    }
                 });
             });
 
@@ -235,18 +272,15 @@
                 if (clientsToRender.length === 0) {
                     $noResults.show(); // Show no results message
                     $tableBody.empty(); // Clear existing rows
-                    return;
                 } else {
                     $noResults.hide(); // Hide no results message
+                    $.each(clientsToRender, function (key, value) {
+                        clientRows += '<tr>';
+                        clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
+                        clientRows += '</tr>';
+                    });
+                    $tableBody.html(clientRows); // Use .html() to replace content
                 }
-
-                $.each(clientsToRender, function (key, value) {
-                    clientRows += '<tr>';
-                    clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
-                    clientRows += '</tr>';
-                });
-
-                $tableBody.html(clientRows); // Use .html() to replace content
             }
         </script>
     </section>
