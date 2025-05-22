@@ -1,97 +1,175 @@
+<!DOCTYPE html>
 <html lang="en">
-  
 <head>
     <meta charset="UTF-8">
-    <title>Support Links</title>
-  
-    <!-- INCLUDING JQUERY-->
-    <script src=
-"https://code.jquery.com/jquery-3.5.1.js">
-    </script>
-  
-    <!-- CSS FOR STYLING THE PAGE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Rustmark Support Links</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
     <style>
-        a { 
-            text-decoration: none;
+        :root {
+            --primary-color: #3498db; /* A nice blue for accents */
+            --secondary-color: #2ecc71; /* Green for success/hover */
+            --text-color: #333;
+            --light-text-color: #555;
+            --background-color: #f4f7f6; /* Light grey background */
+            --card-background: #ffffff;
+            --border-color: #ddd;
+            --hover-background: #e9ecef;
         }
-        
-        table {
-            margin: 0 auto;
-            font-size: large;
-            border: 1px solid black;
+
+        body {
+            font-family: 'Inter', sans-serif; /* Modern sans-serif font */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to the top */
+            min-height: 100vh; /* Full viewport height */
         }
-  
-        #title,
+
+        section {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+        }
+
         h1 {
             text-align: center;
-            color: #006600;
-            font-size: xx-large;
-            font-family: 'Gill Sans', 
-                'Gill Sans MT', ' Calibri', 
-                'Trebuchet MS', 'sans-serif';
+            color: var(--primary-color);
+            font-size: 2.2em; /* Larger, relative sizing */
+            margin-bottom: 30px;
+            font-weight: 600; /* Medium bold */
         }
-  
-        td {
-            background-color: #E4F5D4;
-            border: 1px solid black;
+
+        h1 a {
+            text-decoration: none;
+            color: inherit; /* Inherit color from h1 */
+            transition: color 0.2s ease-in-out;
         }
-  
+
+        h1 a:hover {
+            color: var(--secondary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Removes double borders */
+            margin: 20px 0;
+        }
+
         th,
         td {
-            font-weight: bold;
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
+            border: 1px solid var(--border-color);
+            padding: 12px 15px; /* More padding */
+            text-align: left; /* Align text to the left for better readability */
         }
-  
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase; /* Makes headings stand out */
+            letter-spacing: 0.05em; /* Spacing for uppercase */
+        }
+
         td {
-            font-weight: lighter;
+            background-color: var(--card-background); /* White background for cells */
+            font-weight: 400; /* Regular weight for content */
+        }
+
+        td a {
+            color: var(--primary-color); /* Link color */
+            text-decoration: none;
+            display: block; /* Makes the whole cell clickable */
+            padding: 0; /* Remove default padding from <a> */
+            margin: 0; /* Remove default margin from <a> */
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        td a:hover {
+            background-color: var(--hover-background);
+            color: var(--primary-color); /* Keep link color on hover */
+            text-decoration: underline; /* Add underline on hover for clarity */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            th, td {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
-  
+
 <body>
     <section>
-        <h1><a class="title" href="#" onclick="location.href='rustdesk://config/=0nI9c3YPNlM3EnMykTQ2ZGRkRjW0w0VE9kbPZzU5UUUx4mTVVXV2BXaDdnSpZkI6ISeltmIsIiI6ISawFmIsIiI6ISehxWZyJCLiQXZu5ya4dWOitmLlR3btVmciojI0N3boJye'">Support</a> <a class="title" href="#">Links</a></h1>
-  
-        <!-- TABLE CONSTRUCTION-->
+        <h1>
+            <a href="#" onclick="location.href='rustdesk://config/=0nI9c3YPNlM3EnMykTQ2ZGRkRjW0w0VE9kbPZzU5UUUx4mTVVXV2BXaDdnSpZkI6ISeltmIsIiI6ISawFmIsIiI6ISehxWZyJCLiQXZu5ya4dWOitmLlR3btVmciojI0N3boJye'">Rustmark</a> <a href="#">Support Links</a>
+        </h1>
+
         <table id='table'>
-            <!-- HEADING FORMATION -->
             <tr>
-                <!--<th>ID</th>-->
                 <th>Client Name</th>
             </tr>
-  
+
             <script>
                 $(document).ready(function () {
-  
                     // FETCHING DATA FROM JSON FILE
-                    $.getJSON("clients.json", 
-                            function (data) {
-                        var client = '';
-                        var links = data.sort(function(a, b) { return a.NAME - b.NAME; });
-  
-                        // ITERATING THROUGH OBJECTS
-                        $.each(links, function (key, value) {
-  
-                            //CONSTRUCTION OF ROWS HAVING
-                            // DATA FROM JSON OBJECT
-                            client += '<tr>';
-                            client += '<td> <a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a>' + 
-                              '</td>';
-  
-                            //client += '<td>' + 
-                               // value.NAME + '</td>';
-  
-                            client += '</tr>';
+                    $.getJSON("clients.json",
+                        function (data) {
+                            var clientRows = ''; // Changed variable name for clarity
+                            // Sort by NAME property. Assuming NAME is a string, localeCompare is good for alphabetical sorting.
+                            var sortedLinks = data.sort(function(a, b) {
+                                return a.NAME.localeCompare(b.NAME);
+                            });
+
+                            // ITERATING THROUGH OBJECTS
+                            $.each(sortedLinks, function (key, value) {
+                                // CONSTRUCTION OF ROWS HAVING DATA FROM JSON OBJECT
+                                clientRows += '<tr>';
+                                clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
+                                clientRows += '</tr>';
+                            });
+
+                            // INSERTING ROWS INTO TABLE
+                            $('#table').append(clientRows);
                         });
-                          
-                        //INSERTING ROWS INTO TABLE 
-                        $('#table').append(client);
-                    });
                 });
             </script>
+        </table>
     </section>
 </body>
-  
 </html>
