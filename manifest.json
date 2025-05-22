@@ -1,0 +1,21 @@
+{
+  "name": "Rustmark Support Links",
+  "short_name": "Rustmark Support",
+  "description": "Quick access to Rustdesk client support links.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#00bcd4",
+  "icons": [
+    {
+      "src": "browser.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "browser.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
