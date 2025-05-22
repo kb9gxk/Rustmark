@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Rustmark Support Links</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rustmark Support Links</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,18 +13,22 @@
 
     <style>
         :root {
-            --primary-color: #3498db; /* A nice blue for accents */
-            --secondary-color: #2ecc71; /* Green for success/hover */
-            --text-color: #333;
-            --light-text-color: #555;
-            --background-color: #f4f7f6; /* Light grey background */
-            --card-background: #ffffff;
-            --border-color: #ddd;
-            --hover-background: #e9ecef;
+            /* Dark Mode Color Palette */
+            --primary-color: #00bcd4; /* Cyan - A vibrant accent color */
+            --secondary-color: #4CAF50; /* Green - For success/hover (can be adjusted) */
+            --text-color: #e0e0e0; /* Light grey for primary text */
+            --light-text-color: #a0a0a0; /* Slightly darker grey for secondary text/notes */
+            --background-color: #1a1a1a; /* Very dark background */
+            --card-background: #2b2b2b; /* Slightly lighter dark for card elements */
+            --border-color: #444; /* Darker border for separation */
+            --hover-background: #3a3a3a; /* Slightly lighter hover for table rows */
+            --input-background: #3b3b3b; /* Background for input fields */
+            --input-text-color: #f0f0f0; /* Text color inside input */
+            --placeholder-color: #888; /* Placeholder text color */
         }
 
         body {
-            font-family: 'Inter', sans-serif; /* Modern sans-serif font */
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 20px;
@@ -31,76 +36,114 @@
             color: var(--text-color);
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Align to the top */
-            min-height: 100vh; /* Full viewport height */
+            align-items: flex-start;
+            min-height: 100vh;
         }
 
         section {
             background-color: var(--card-background);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* More prominent shadow for dark theme */
             width: 100%;
-            max-width: 600px; /* Max width for readability */
+            max-width: 600px;
         }
 
         h1 {
             text-align: center;
             color: var(--primary-color);
-            font-size: 2.2em; /* Larger, relative sizing */
+            font-size: 2.2em;
             margin-bottom: 30px;
-            font-weight: 600; /* Medium bold */
+            font-weight: 600;
         }
 
         h1 a {
             text-decoration: none;
-            color: inherit; /* Inherit color from h1 */
+            color: inherit;
             transition: color 0.2s ease-in-out;
         }
 
         h1 a:hover {
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Green accent on hover for title */
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        #clientSearch {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1.1em;
+            box-sizing: border-box;
+            outline: none;
+            background-color: var(--input-background); /* Darker input background */
+            color: var(--input-text-color); /* Light text color */
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        #clientSearch::placeholder { /* Styling for placeholder text */
+            color: var(--placeholder-color);
+            opacity: 1; /* Firefox default opacity is lower */
+        }
+
+        #clientSearch:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); /* Primary color shadow with transparency */
         }
 
         table {
             width: 100%;
-            border-collapse: collapse; /* Removes double borders */
+            border-collapse: collapse;
             margin: 20px 0;
         }
 
         th,
         td {
             border: 1px solid var(--border-color);
-            padding: 12px 15px; /* More padding */
-            text-align: left; /* Align text to the left for better readability */
+            padding: 12px 15px;
+            text-align: left;
         }
 
         th {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--primary-color); /* Primary color for table header */
+            color: var(--input-text-color); /* Light text on primary color */
             font-weight: 600;
-            text-transform: uppercase; /* Makes headings stand out */
-            letter-spacing: 0.05em; /* Spacing for uppercase */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         td {
-            background-color: var(--card-background); /* White background for cells */
-            font-weight: 400; /* Regular weight for content */
+            background-color: var(--card-background); /* Card background for cells */
+            font-weight: 400;
         }
 
         td a {
-            color: var(--primary-color); /* Link color */
+            color: var(--primary-color); /* Primary color for links */
             text-decoration: none;
-            display: block; /* Makes the whole cell clickable */
-            padding: 0; /* Remove default padding from <a> */
-            margin: 0; /* Remove default margin from <a> */
+            display: block;
+            padding: 0;
+            margin: 0;
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
         }
 
         td a:hover {
-            background-color: var(--hover-background);
-            color: var(--primary-color); /* Keep link color on hover */
-            text-decoration: underline; /* Add underline on hover for clarity */
+            background-color: var(--hover-background); /* Lighter dark background on hover */
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Message for no results */
+        #noResults {
+            text-align: center;
+            color: var(--light-text-color);
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
         }
 
         /* Responsive adjustments */
@@ -115,6 +158,10 @@
 
             h1 {
                 font-size: 1.8em;
+            }
+
+            #clientSearch {
+                font-size: 1em;
             }
 
             th, td {
@@ -140,36 +187,68 @@
             <a href="#" onclick="location.href='rustdesk://config/=0nI9c3YPNlM3EnMykTQ2ZGRkRjW0w0VE9kbPZzU5UUUx4mTVVXV2BXaDdnSpZkI6ISeltmIsIiI6ISawFmIsIiI6ISehxWZyJCLiQXZu5ya4dWOitmLlR3btVmciojI0N3boJye'">Rustmark</a> <a href="#">Support Links</a>
         </h1>
 
-        <table id='table'>
-            <tr>
-                <th>Client Name</th>
-            </tr>
+        <div class="search-container">
+            <input type="text" id="clientSearch" placeholder="Search client or device name...">
+        </div>
 
-            <script>
-                $(document).ready(function () {
-                    // FETCHING DATA FROM JSON FILE
-                    $.getJSON("clients.json",
-                        function (data) {
-                            var clientRows = ''; // Changed variable name for clarity
-                            // Sort by NAME property. Assuming NAME is a string, localeCompare is good for alphabetical sorting.
-                            var sortedLinks = data.sort(function(a, b) {
-                                return a.NAME.localeCompare(b.NAME);
-                            });
-
-                            // ITERATING THROUGH OBJECTS
-                            $.each(sortedLinks, function (key, value) {
-                                // CONSTRUCTION OF ROWS HAVING DATA FROM JSON OBJECT
-                                clientRows += '<tr>';
-                                clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
-                                clientRows += '</tr>';
-                            });
-
-                            // INSERTING ROWS INTO TABLE
-                            $('#table').append(clientRows);
-                        });
-                });
-            </script>
+        <table id='clientTable'>
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                </tr>
+            </thead>
+            <tbody id="clientTableBody">
+                </tbody>
         </table>
+
+        <p id="noResults">No matching clients found.</p>
+
+        <script>
+            let allClientsData = []; // Store the full data globally
+
+            $(document).ready(function () {
+                // FETCHING DATA FROM JSON FILE
+                $.getJSON("clients.json", function (data) {
+                    allClientsData = data.sort(function(a, b) {
+                        return a.NAME.localeCompare(b.NAME);
+                    });
+                    renderTable(allClientsData); // Initial render
+                }).fail(function() {
+                    $('#clientTableBody').html('<tr><td colspan="1" style="text-align: center; color: var(--primary-color);">Error loading client data. Please check clients.json.</td></tr>');
+                });
+
+                // Search functionality
+                $('#clientSearch').on('keyup', function() {
+                    const searchTerm = $(this).val().toLowerCase();
+                    const filteredClients = allClientsData.filter(client => {
+                        return client.NAME.toLowerCase().includes(searchTerm);
+                    });
+                    renderTable(filteredClients);
+                });
+            });
+
+            function renderTable(clientsToRender) {
+                let clientRows = '';
+                const $tableBody = $('#clientTableBody');
+                const $noResults = $('#noResults');
+
+                if (clientsToRender.length === 0) {
+                    $noResults.show(); // Show no results message
+                    $tableBody.empty(); // Clear existing rows
+                    return;
+                } else {
+                    $noResults.hide(); // Hide no results message
+                }
+
+                $.each(clientsToRender, function (key, value) {
+                    clientRows += '<tr>';
+                    clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
+                    clientRows += '</tr>';
+                });
+
+                $tableBody.html(clientRows); // Use .html() to replace content
+            }
+        </script>
     </section>
 </body>
 </html>
