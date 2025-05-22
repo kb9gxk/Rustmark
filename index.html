@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rustmark Support Links</title>
 
+    <link rel="icon" href="browser.png" type="image/png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -35,9 +37,23 @@
             background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column; /* Changed to column */
+            justify-content: flex-start; /* Align items to the top */
+            align-items: center; /* Center items horizontally */
             min-height: 100vh;
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            margin-bottom: 20px;
+            text-align: center; /* Center the logo */
+        }
+
+        .logo {
+            max-width: 200px; /* Adjust the maximum width as needed */
+            height: auto;
+            display: block; /* Remove any extra spacing */
+            margin: 0 auto; /* Center the logo horizontally */
         }
 
         section {
@@ -100,7 +116,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            /* Initially hidden by default, shown by JS */
+            display: none; /* Initially hidden by default, shown by JS */
         }
 
         th,
@@ -156,12 +172,6 @@
             display: block;
         }
 
-        /* Hide table by default, show when populated by JS */
-        #clientTable {
-            display: none;
-        }
-
-
         /* Responsive adjustments */
         @media (max-width: 768px) {
             body {
@@ -198,6 +208,10 @@
 </head>
 
 <body>
+    <div class="logo-container">
+        <img src="Color logo - no background.jpg" alt="Company Logo" class="logo">
+    </div>
+
     <section>
         <h1>
             <a href="#" onclick="location.href='rustdesk://config/=0nI9c3YPNlM3EnMykTQ2ZGRkRjW0w0VE9kbPZzU5UUUx4mTVVXV2BXaDdnSpZkI6ISeltmIsIiI6ISawFmIsIiI6ISehxWZyJCLiQXZu5ya4dWOitmLlR3btVmciojI0N3boJye'">Rustmark</a> <a href="#">Support Links</a>
@@ -219,70 +233,69 @@
             <tbody id="clientTableBody">
                 </tbody>
         </table>
+    </section>
 
+    <script>
+        let allClientsData = []; // Store the full data globally
 
-        <script>
-            let allClientsData = []; // Store the full data globally
-
-            $(document).ready(function () {
-                // FETCHING DATA FROM JSON FILE
-                $.getJSON("clients.json", function (data) {
-                    allClientsData = data.sort(function(a, b) {
-                        return a.NAME.localeCompare(b.NAME);
-                    });
-                    // DO NOT call renderTable(allClientsData) here
-                    // The table will remain hidden until a search is performed.
-                }).fail(function() {
-                    $('#clientTableBody').html('<tr><td colspan="1" style="text-align: center; color: var(--primary-color);">Error loading client data. Please check clients.json.</td></tr>');
-                    // Hide the initial message if there's an error
-                    $('#initialMessage').hide();
+        $(document).ready(function () {
+            // FETCHING DATA FROM JSON FILE
+            $.getJSON("clients.json", function (data) {
+                allClientsData = data.sort(function(a, b) {
+                    return a.NAME.localeCompare(b.NAME);
                 });
-
-                // Set focus on the search bar when the page loads
-                $('#clientSearch').focus();
-
-                // Search functionality
-                $('#clientSearch').on('keyup', function() {
-                    const searchTerm = $(this).val().toLowerCase().trim(); // Trim whitespace
-                    const $initialMessage = $('#initialMessage');
-                    const $noResults = $('#noResults');
-                    const $clientTable = $('#clientTable');
-
-                    if (searchTerm.length > 0) {
-                        $initialMessage.hide(); // Hide the initial message once typing starts
-                        const filteredClients = allClientsData.filter(client => {
-                            return client.NAME.toLowerCase().includes(searchTerm);
-                        });
-                        renderTable(filteredClients);
-                        $clientTable.show(); // Show the table when there's a search term
-                    } else {
-                        // If search bar is empty, hide the table and show initial message
-                        $clientTable.hide();
-                        $noResults.hide(); // Hide no results as well
-                        $initialMessage.show(); // Show initial message again
-                    }
-                });
+                // DO NOT call renderTable(allClientsData) here
+                // The table will remain hidden until a search is performed.
+            }).fail(function() {
+                $('#clientTableBody').html('<tr><td colspan="1" style="text-align: center; color: var(--primary-color);">Error loading client data. Please check clients.json.</td></tr>');
+                // Hide the initial message if there's an error
+                $('#initialMessage').hide();
             });
 
-            function renderTable(clientsToRender) {
-                let clientRows = '';
-                const $tableBody = $('#clientTableBody');
-                const $noResults = $('#noResults');
+            // Set focus on the search bar when the page loads
+            $('#clientSearch').focus();
 
-                if (clientsToRender.length === 0) {
-                    $noResults.show(); // Show no results message
-                    $tableBody.empty(); // Clear existing rows
-                } else {
-                    $noResults.hide(); // Hide no results message
-                    $.each(clientsToRender, function (key, value) {
-                        clientRows += '<tr>';
-                        clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
-                        clientRows += '</tr>';
+            // Search functionality
+            $('#clientSearch').on('keyup', function() {
+                const searchTerm = $(this).val().toLowerCase().trim(); // Trim whitespace
+                const $initialMessage = $('#initialMessage');
+                const $noResults = $('#noResults');
+                const $clientTable = $('#clientTable');
+
+                if (searchTerm.length > 0) {
+                    $initialMessage.hide(); // Hide the initial message once typing starts
+                    const filteredClients = allClientsData.filter(client => {
+                        return client.NAME.toLowerCase().includes(searchTerm);
                     });
-                    $tableBody.html(clientRows); // Use .html() to replace content
+                    renderTable(filteredClients);
+                    $clientTable.show(); // Show the table only when there's a search term
+                } else {
+                    // If search bar is empty, hide the table and show initial message
+                    $clientTable.hide();
+                    $noResults.hide(); // Hide no results as well
+                    $initialMessage.show(); // Show initial message again
                 }
+            });
+        });
+
+        function renderTable(clientsToRender) {
+            let clientRows = '';
+            const $tableBody = $('#clientTableBody');
+            const $noResults = $('#noResults');
+
+            if (clientsToRender.length === 0) {
+                $noResults.show(); // Show no results message
+                $tableBody.empty(); // Clear existing rows
+            } else {
+                $noResults.hide(); // Hide no results message
+                $.each(clientsToRender, function (key, value) {
+                    clientRows += '<tr>';
+                    clientRows += '<td><a href="#" onclick="location.href=\'rustdesk://' + value.ID + '\'">' + value.NAME + '</a></td>';
+                    clientRows += '</tr>';
+                });
+                $tableBody.html(clientRows); // Use .html() to replace content
             }
-        </script>
-    </section>
+        }
+    </script>
 </body>
 </html>
